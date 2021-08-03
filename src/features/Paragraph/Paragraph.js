@@ -10,7 +10,7 @@ export function Paragraph() {
   const [paragraphtext, setParagraphText] = useState("");
 
   // FIXME: 
-  const [skipwords, setSkipWords] = useState(0);
+  const [, setSkipWords] = useState(0);
 
   const handleSubmit = (e) => {
     e.preventDefault();
