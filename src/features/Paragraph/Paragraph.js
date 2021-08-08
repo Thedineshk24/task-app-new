@@ -1,16 +1,19 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { setText } from "./paragraphSlice";
+import { setText, setSkipWordsNums } from "./paragraphSlice";
 import "./paragraph.css";
 import { Button, Form, Label, Input } from "reactstrap";
 
 export function Paragraph() {
   const text = useSelector((state) => state.paragraphReducer.text);
+  const skippedWord = useSelector((state) => state.paragraphReducer.theWodrds);
   const dispatch = useDispatch();
   const [paragraphtext, setParagraphText] = useState("");
 
-  // FIXME: 
-  const [, setSkipWords] = useState(0);
+  // const [skipwords, setSkipWords] = useState(0);
+
+  // console.log("skipwords", skipwords);
+  console.log("skippedWord",skippedWord);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -22,10 +25,10 @@ export function Paragraph() {
   return (
     <Form className='main__form'>
       <div className='paragraph__app'>
-        <div className="row">
-          <div className="col-md-12">
+        <div className='row'>
+          <div className='col-md-12'>
             <h2>String Manipulation</h2>
-            <hr className="mb-4" />
+            <hr className='mb-4' />
           </div>
         </div>
         <div className='row'>
@@ -50,7 +53,7 @@ export function Paragraph() {
                 className='input__number'
                 type='number'
                 name='text'
-                onChange={(e) => setSkipWords(e.target.value)}
+                onChange={(e) => dispatch(setSkipWordsNums(e.target.value))}
               />
               two words
             </Label>
@@ -71,9 +74,7 @@ export function Paragraph() {
                 <Label for=''>Output :</Label>
               </div>
               <div className='col-md-9'>
-                <p className='out__text'>
-                  {text?.split(/\s/)?.reverse()?.join(" ")}
-                </p>
+                <p className='out__text'>{text+ ' ' +skippedWord}</p>
               </div>
             </>
           )}
