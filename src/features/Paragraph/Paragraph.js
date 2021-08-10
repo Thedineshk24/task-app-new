@@ -6,14 +6,11 @@ import { Button, Form, Label, Input } from "reactstrap";
 
 export function Paragraph() {
   const text = useSelector((state) => state.paragraphReducer.text);
-  const skippedWord = useSelector((state) => state.paragraphReducer.theWodrds);
+  const first = useSelector((state) => state.paragraphReducer.firstString);
+  const last = useSelector((state) => state.paragraphReducer.lastString);
+
   const dispatch = useDispatch();
   const [paragraphtext, setParagraphText] = useState("");
-
-  // const [skipwords, setSkipWords] = useState(0);
-
-  // console.log("skipwords", skipwords);
-  console.log("skippedWord",skippedWord);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -21,7 +18,6 @@ export function Paragraph() {
       dispatch(setText(paragraphtext));
     }
   };
-
   return (
     <Form className='main__form'>
       <div className='paragraph__app'>
@@ -55,7 +51,7 @@ export function Paragraph() {
                 name='text'
                 onChange={(e) => dispatch(setSkipWordsNums(e.target.value))}
               />
-              two words
+              words
             </Label>
           </div>
         </div>
@@ -74,7 +70,7 @@ export function Paragraph() {
                 <Label for=''>Output :</Label>
               </div>
               <div className='col-md-9'>
-                <p className='out__text'>{text+ ' ' +skippedWord}</p>
+                <p className='out__text'>{first.replace('..','. ')+' '+last}</p>
               </div>
             </>
           )}
